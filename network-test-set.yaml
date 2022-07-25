@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: net-test
-        image: registry.example.com/aas/swissknife
+        image: image: nginx:1.15.9
         securityContext:
           runAsNonRoot: true
           runAsUser: 1001

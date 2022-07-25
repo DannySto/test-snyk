@@ -5,14 +5,14 @@ metadata:
   # annotations:
   #     kubernetes.io/ingress.class: nginx-red-internal
 spec:
-  ingressClassName: nginx-red-internal
+  ingressClassName: nginx
   rules:
-  - host: application.itv.local.url
+  - host: application.local.url
     http:
       paths:
       - backend:
-          serviceName: aas-tools-svc
+          serviceName: aas-too-svc
           servicePort: 80
   tls:
   - hosts:
-    - application.itv.local.url 
+    - application.local.url 

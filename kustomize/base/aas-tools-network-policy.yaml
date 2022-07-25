@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: allow-ingress-to-cd-test
+  name: allow-ingress
   # namespace: cd-acc
 spec:
   ingress:
@@ -15,6 +15,6 @@ spec:
       protocol: TCP
   podSelector:
     matchLabels:
-      app: aas-tools
+      app: aas-too
   policyTypes:
   - Ingress

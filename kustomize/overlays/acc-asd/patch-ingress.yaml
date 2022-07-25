@@ -3,15 +3,14 @@ kind: Ingress
 metadata:
   name: aas-tools
 spec:
-  ingressClassName: nginx-red-internal
+  ingressClassName: nginx-red
   rules:
-  - host: aas-tools.asd.k8s.acc.itv.local
+  - host: too.test.local
     http:
       paths:
       - backend:
-          serviceName: aas-tools-svc
+          serviceName: aas-too-svc
           servicePort: 80
   tls:
-  # - secretName: koen-test-domains-certificate
   - hosts:
-    - aas-tools.asd.k8s.acc.itv.local
+    - too.test.local

@@ -1,17 +1,16 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: aas-tools
+  name: aas-too
 spec:
-  ingressClassName: nginx-red-internal
+  ingressClassName: nginx-red
   rules:
-  - host: aas-tools.asd.k8s.itv.local
+  - host: aas-too.local
     http:
       paths:
       - backend:
-          serviceName: aas-tools-svc
+          serviceName: aas-too-svc
           servicePort: 80
   tls:
-  # - secretName: koen-test-domains-certificate
   - hosts:
-    - aas-tools.asd.k8s.itv.local
+    - aas-too.local
