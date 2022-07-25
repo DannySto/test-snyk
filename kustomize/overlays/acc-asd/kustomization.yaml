@@ -1,0 +1,13 @@
+bases:
+  - ../../base/
+
+commonLabels:
+  app: aas-tools
+
+namespace: cd-acc
+
+# namePrefix: acc-
+patchesStrategicMerge:
+- patch-ingress.yaml
+
+

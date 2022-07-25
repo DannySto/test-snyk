@@ -1,0 +1,64 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: aas-tools
+     
+spec:
+  selector:
+    matchLabels:
+      app: aas-tools
+  replicas: 2 # tells the deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: aas-tools
+    spec:
+      serviceAccountName: default
+      containers:
+      - name: nginx
+        image: "registry.example.com/aas/aas-tools:%%VERSION%%"
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 1001
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - ALL
+        ports:
+        - containerPort: 8080
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+            httpHeaders:
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        readinessProbe:
+          httpGet:
+            scheme: HTTP
+            path: /index.html
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        volumeMounts:
+        - mountPath: /var/run
+          name: tmpfs-1
+        - mountPath: /var/cache/nginx
+          name: tmpfs-2
+        - mountPath: /tmp
+          name: tmpfs-3
+        resources:
+          requests:
+            memory: "200Mi"
+            cpu: "200m"
+          limits:
+            memory: "500Mi"
+            cpu: "500m"
+      volumes:
+        - name: tmpfs-1
+          emptyDir: {}
+        - name: tmpfs-2
+          emptyDir: {}
+        - name: tmpfs-3
+          emptyDir: {}

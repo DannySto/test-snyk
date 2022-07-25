@@ -1,0 +1,5 @@
+resources:
+  - aas-tools-deploy.yaml
+  - aas-tools-ingress.yaml
+  - aas-tools-network-policy.yaml
+  - aas-tools-svc.yaml

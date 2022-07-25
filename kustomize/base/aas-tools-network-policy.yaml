@@ -1,0 +1,20 @@
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-ingress-to-cd-test
+  # namespace: cd-acc
+spec:
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: nginx-ingress
+    ports:
+    - port: 8080
+      protocol: TCP
+  podSelector:
+    matchLabels:
+      app: aas-tools
+  policyTypes:
+  - Ingress

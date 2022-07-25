@@ -1,0 +1,29 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: StatefulSet
+metadata:
+  name: network-test-set
+  labels: 
+    app: net-test
+spec:
+  selector:
+    matchLabels:
+      app: net-test
+  replicas: 1 # tells the deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: net-test
+    spec:
+      containers:
+      - name: net-test
+        image: registry.example.com/aas/swissknife
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 1001
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - ALL
+        command: ["/bin/sh", "-ec", "sleep 1000"]
+  serviceName: network-test-set

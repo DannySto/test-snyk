@@ -1,0 +1,11 @@
+bases:
+  - ../../base/
+
+commonLabels:
+  app: aas-tools
+
+namespace: cd-prod
+
+# namePrefix: acc-
+patchesStrategicMerge:
+- patch-ingress.yaml
